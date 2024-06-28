@@ -1,9 +1,10 @@
+import os
+import time
 import numpy as np
 import streamlit as st
 import pandas as pd 
 import pickle 
 from sklearn.preprocessing import LabelEncoder
-import time
 st.set_page_config(page_title="Credit Card Fraud Detection",layout="wide",page_icon="fraud.png")
 lb = LabelEncoder()
 
@@ -12,14 +13,23 @@ def text_col(df_pipe):
     df_pipe["category"] = lb.fit_transform(df_pipe["category"])
     
     return df_pipe
-	
-with open("pipe.pkl", "rb") as file:
-    pipe = pickle.load(file)
 
-with open("category.pkl", "rb") as file:
-    category = pickle.load(file)
+pipe_path = "pipe.pkl"
+category_path = "category.pkl"
 
+if os.path.exists(pipe_path):
+    with open(pipe_path, "rb") as file:
+        pipe = pickle.load(file)
+else:
+    print(f"{pipe_path} not found")
+    pipe = None
 
+if os.path.exists(category_path):
+    with open(category_path, "rb") as file:
+        category = pickle.load(file)
+else:
+    print(f"{category_path} not found")
+    category = None
 
 st.header("Credit Card Fraud Detection",divider="blue")
 	
