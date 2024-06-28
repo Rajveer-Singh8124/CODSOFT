@@ -12,9 +12,12 @@ def text_col(df_pipe):
     df_pipe["category"] = lb.fit_transform(df_pipe["category"])
     
     return df_pipe
+	
+with open("pipe.pkl", "rb") as file:
+    pipe = pickle.load(file)
 
-pipe =pickle.load(open("pipe.pkl","rb"))
-category =pickle.load(open("category.pkl","rb"))
+with open("category.pkl", "rb") as file:
+    category = pickle.load(file)
 
 
 
