@@ -17,6 +17,8 @@ def text_col(df_pipe):
 pipe_path = "pipe.pkl"
 category_path = "category.pkl"
 
+
+
 if os.path.exists(pipe_path):
     with open(pipe_path, "rb") as file:
         pipe = pickle.load(file)
@@ -24,12 +26,11 @@ else:
     print(f"{pipe_path} not found")
     pipe = None
 
-if os.path.exists(category_path):
-    with open(category_path, "rb") as file:
-        category = pickle.load(file)
-else:
-    print(f"{category_path} not found")
-    category = None
+
+category = pd.DataFrame(["shopping net","gas transport","misc pos","shopping pos","personal care","home"
+,"misc net","health fitness","grocery pos"
+,"entertainment","grocery net","food dining","kids pets","travel"]) 
+
 
 st.header("Credit Card Fraud Detection",divider="blue")
 	
@@ -56,7 +57,7 @@ with st.form("input-form"):
         with col[1]:
             merch_long = st.number_input("Longitude of the merchant's location*")
 
-        category = st.selectbox("Category of the transaction",category["category"])
+        category = st.selectbox("Category of the transaction",category[0])
         pd = pd.DataFrame({"cc_num":cc_num,"lat":lat,"long":long,"amt":amt,"merch_lat":merch_lat,"merch_long":merch_long,"category":category},index=["a"])
         predict = pipe.predict(pd)
 
