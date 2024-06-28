@@ -13,9 +13,8 @@ def text_col(df_pipe):
     
     return df_pipe
 
-
-pipe = pickle.load(open("pipe.pkl","rb"))
-category = pickle.load(open("category.pkl","rb"))
+pipe =pickle.load(open("pipe.pkl","rb"))
+category =pickle.load(open("category.pkl","rb"))
 
 
 
